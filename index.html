@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Hangman Game</title>
+	<link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+	<link rel="stylesheet" type="text/css" href="./assets/css/reset.css">
+	<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet">
+	<script type="text/javascript" src="./assets/javascript/game.js"></script>
+
+	<script type="text/javascript" src="./assets/javascript/hangmanDictionary.js"></script>	
+</head>
+
+<body onload="playGame(), resizeBg()" onresize="resizeBg()">
+	
+	<img src="./assets/images/wallpaper.jpg" id="bg" alt="background image">
+
+	<div class="margin-auto margintop-40px width-80-pct">
+
+		<div class="margin-auto width-100-pct">
+			<aside class = "brdr-2px brdr-outset-grey flt-lft marginbottom-40px outsetborder-grey width-60-pct">
+				<div class="bg-color-blue color-white font-sans font-size-14px height-20-px pad-2px width-100-pct">HANGMAN
+					<div class="bg-color-grey brdr-1px brdr-outset-grey center-text color-lightgrey flt-rt height-16-px line-height-10px width-16-px">x</div>
+				</div>
+				<div class="bg-color-grey pad-2px width-100-pct"><img src="./assets/images/title.jpg" class="width-100-pct" alt="'Vaporwave Hangman' title card"></div>
+			</aside>
+
+			<aside class="brdr-2px brdr-outset-grey flt-rt marginbottom-40px outsetborder-grey width-35-pct">
+				<div class="bg-color-blue color-white font-sans font-size-14px height-20-px pad-2px width-100-pct">DID YOU KNOW...<div class="bg-color-grey brdr-1px brdr-outset-grey center-text color-lightgrey flt-rt height-16-px line-height-10px width-16-px">x</div></div>
+				<div class="bg-color-grey font-sans font-size-14px font-weight-lighter pad-16px width-100-pct">This is a game of hangman. Type one letter at a time to guess the <span class="bg-color-blue color-white font-monospace font-size-12px">TARGET WORD</span> without running out of <span class="bg-color-blue color-white font-monospace font-size-12px">CHANCES</span>.<br><br>Type any letter key to make your first guess.</div>
+			</aside>
+		</div>
+
+		<div class="margin-auto width-100-pct">
+			
+
+			<main class="flt-lft width-60-pct">
+
+				<main class="brdr-2px brdr-outset-grey marginbottom-24px width-100-pct">
+					<div class="bg-color-blue color-white font-sans font-size-14px height-20-px pad-2px width-100-pct">GAME STATS<div class="bg-color-grey brdr-1px brdr-outset-grey center-text color-lightgrey flt-rt height-16-px line-height-10px width-16-px">x</div></div>
+					<div class="bg-color-black color-green font-monospace font-size-12px line-height-24px pad-2px">C:\player\hangman\<span class="bg-color-blue color-white">TARGET_WORD</span>&#62; &nbsp;<span class="color-white font-size-16px " id="targetWordDisplay"> </span>&nbsp;</div>
+					<div class="bg-color-black color-green font-monospace font-size-12px line-height-24px pad-2px">C:\player\hangman\<span class="bg-color-blue color-white">CHANCES_REMAINING</span>&#62; &nbsp;<span class="color-white font-size-16px" id="chancesDisplay">7</span>&nbsp;</div>
+					<div class="bg-color-black color-green font-monospace font-size-12px line-height-24px pad-2px">C:\player\hangman\<span class="bg-color-blue color-white">WINS: </span>&#62; &nbsp;<span class="color-white font-size-16px" id="winsDisplay">0</span>&nbsp;</div>
+				</main>
+
+				<main class="brdr-2px brdr-outset-grey flt-lft margin-auto width-100-pct">
+					<div class="bg-color-blue color-white font-sans font-size-14px height-20-px pad-2px width-100-pct">ENTER GUESSES HERE<div class="bg-color-grey brdr-1px brdr-outset-grey center-text color-lightgrey flt-rt height-16-px line-height-10px width-16-px vert-align-mid">x</div></div>
+					<div class="bg-color-black color-green font-monospace font-size-12px pad-2px">C:\lettersGuessed&#62; &nbsp;<span class="color-white" id="guessesDisplay"> </span><span class="blinking-cursor">|</span></div>
+				</main>
+
+			</main>
+
+			<div class="flt-rt width-35-pct">
+				<aside class = "brdr-2px brdr-outset-grey flt-rt outsetborder-grey width-50-pct">
+					<div class="bg-color-blue color-white font-sans font-size-14px height-20-px pad-2px width-100-pct">HAVE FUN
+						<div class="bg-color-grey brdr-1px center-text color-lightgrey flt-rt height-16-px line-height-10px width-16-px">x</div>
+					</div>
+					<div class="bg-color-grey pad-2px width-100-pct"><img src="./assets/images/hangman.gif" class="width-100-pct" alt="decorative gif of moon spinning"></div>
+				</aside>
+
+			</div>
+
+			<div id="myPopUp" class="brdr-2px brdr-outset-grey popUp">
+					<div class="bg-color-blue color-white font-sans font-size-14px height-20-px pad-2px width-100-pct">ALERT<div class="popUpClose bg-color-grey brdr-1px brdr-outset-grey center-text color-black flt-rt height-16-px width-16-px">x</div>
+					</div>
+					<div class="bg-color-grey font-sans font-size-14px font-weight-lighter height-100pct pad-16px width-100-pct">
+						<p id="popUpMessage"> </p>
+					</div>
+			</div>
+
+		</div>
+
+	</div>
+
+	<footer class="bg-color-grey brdr-1px brdr-outset-grey font-sans height-40-px line-height-30px position-fixed-bottom width-100-pct">
+		<div id="resetBtn" class="brdr-1px brdr-outset-grey center-text color-black flt-lft font-size-14px height-38-px pad-2px"> New Game </div>
+		<div class="color-lightgrey flt-t font-size-30px font-weight-lighter height-38-px">|</div>
+	</footer>
+
+	<script>
+		var wallpaper = document.getElementById("bg")
+	    var aspectRatio = wallpaper.width / wallpaper.height; 		
+	   
+		var targetWord = null;
+		var guessedLetters = guessedLetters = document.getElementById("guessesDisplay");
+		var trackerPrint = document.getElementById("chancesDisplay");
+		var winsPrint = document.getElementById("winsDisplay");
+		var targetWordArray = null;
+		var targetWordArrayPrint = document.getElementById("targetWordDisplay");
+		var winGame = null;
+		var winTrackerNum = 0;
+		var guessedLettersArray = [];
+		var tracker = 0;
+		function playGame() {
+			
+			initializeGame();
+			var popUpWindow = document.getElementById("myPopUp");
+			var span = document.getElementsByClassName("popUpClose")[0];
+			var popUpText = document.getElementById("popUpMessage");
+			var isOpen;
+			
+			
+			var refreshBtn = document.getElementById("resetBtn");
+				refreshBtn.onclick = function() {
+					initializeGame();
+			}
+			span.onclick = function() {
+				    popUpWindow.style.display = "none";
+				    isOpen = false;
+			}
+			document.onkeydown = function(event) {
+				var latestGuessedLetter = event.key.toLowerCase();
+	    		if(isOpen == true && event.keyCode == 13){
+				    popUpWindow.style.display = "none";
+				    isOpen = false;
+				    return;
+				}
+	    		else if(tracker === 0){
+	    			popUpText.textContent = ("YOU ALREADY LOST.");
+	    			popUpWindow.style.display = "block";
+	    			isOpen = true;
+	    			return;
+	    		}
+    			else if (winGame == true){
+					popUpText.textContent = ("YOU ALREADY WON.");
+	    			popUpWindow.style.display = "block";
+	    			isOpen = true;
+    				return;
+    			}
+    			else if (isInArray(guessedLettersArray, latestGuessedLetter)){
+    				popUpText.textContent = ("YOU ALREADY GUESSED THIS LETTER.");
+	    			popUpWindow.style.display = "block";
+	    			isOpen = true;
+    				return;
+    			}
+    			else {
+			    	if (event.keyCode >= 65 && event.keyCode <= 90) {
+			    		pushAndPrintString(latestGuessedLetter, guessedLettersArray, guessedLetters);
+			    		var indicesAndTargetWordObject = checkLetterInWord(latestGuessedLetter, targetWord, targetWordArray);
+			    		if (indicesAndTargetWordObject.letterNumber < 0) {
+			    			tracker--;
+			    			trackerPrint.textContent = tracker;
+			    			if(tracker === 0){
+			    				popUpText.textContent = ("YOU LOST.");
+				    			popUpWindow.style.display = "block";
+				    			isOpen = true;
+			    				return;
+		    				}
+			    		}
+			    		
+			    		else{
+			    			targetWordArrayPrint.textContent = targetWordArray.join("");
+			    			var blankSpaceCount = 0; 
+			    			for (i = 0; i < targetWordArray.length; i++){
+			    				if (targetWordArray[i] == " _ "){
+			    					blankSpaceCount++;
+			    				}
+			    			}
+			    			if (blankSpaceCount == 0){
+			    				winGame = true;
+			    				popUpText.textContent = ("YOU WIN");
+				    			popUpWindow.style.display = "block";
+				    			winTrackerNum++;
+				    			winsPrint.textContent = winTrackerNum;
+				    			isOpen = true;
+			    				return;
+			    			}
+			    		}
+					}
+			    	else if (event.keyCode !== 13){
+			    		popUpText.textContent = ("LETTERS ONLY, PLEASE");
+			    		popUpWindow.style.display = "block";
+			    		isOpen = true;
+			    		return;
+			    	}
+			    }
+			}
+		
+		}
+	</script>
+
+</body>
+
+</html>
